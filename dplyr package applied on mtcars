@@ -1,0 +1,23 @@
+data("mtcars")
+mtcars
+#filter(data, criteria) :selects a part of data based on a criteria 
+filter(mtcars, vs == 0)
+filter(mtcars, vs == 0, gear == 4)
+filter(mtcars, vs == 0 & gear == 4)
+filter(mtcars, hp==110 | hp==180 | hp== 150)
+#select(data): keeps the variables you mention
+select(mtcars, mpg, disp, qsec)
+select(mtcars, mpg:drat)
+select(mtcars, mpg, drat, hp, cyl, vs, everything())
+#mutate(data, new_variables): adds a new variable and preserves the rest
+mutate(mtcars, new= mpg/wt)
+#transmute(data, new_variables): adds a new variable and drops the rest
+transmute(mtcars, new= mpg/wt)
+#arrange()
+arrange(mtcars, mpg)
+arrange(mtcars, desc(mpg))
+#summarize(): summarizes a dataframe into a single result
+summarize(mtcars, avg.wt= mean(wt, na.rm= T))
+#group_by(): splits the dataset into groups
+car_dat= group_by(mtcars, hp)
+summarize(car_dat, avg.wt= mean(wt, na.rm= T))
